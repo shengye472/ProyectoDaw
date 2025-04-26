@@ -1,6 +1,6 @@
 package com.shopflow.persistence.dao.jpa.repository;
 
-import com.shopflow.persistance.dao.jpa.model.ProductEntity;
+import com.shopflow.persistence.dao.jpa.model.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

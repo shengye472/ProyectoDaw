@@ -1,9 +1,9 @@
 package com.shopflow.persistence.dao.jpa;
 
 import com.shopflow.domain.model.Product;
-import com.shopflow.persistance.dao.ProductDao;
-import com.shopflow.persistance.dao.jpa.mapper.ProductJpaMapper;
-import com.shopflow.persistance.dao.jpa.repository.ProductJpaRepository;
+import com.shopflow.persistence.dao.ProductDao;
+import com.shopflow.persistence.dao.jpa.mapper.ProductJpaMapper;
+import com.shopflow.persistence.dao.jpa.repository.ProductJpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

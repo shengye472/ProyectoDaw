@@ -2,7 +2,7 @@ package com.shopflow.persistence.repository.impl;
 
 import com.shopflow.domain.model.Product;
 import com.shopflow.domain.repository.ProductRepository;
-import com.shopflow.persistance.dao.ProductDao;
+import com.shopflow.persistence.dao.ProductDao;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
