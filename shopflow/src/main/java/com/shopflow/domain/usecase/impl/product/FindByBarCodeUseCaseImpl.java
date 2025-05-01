@@ -1,15 +1,15 @@
-package com.shopflow.domain.usecase.impl;
+package com.shopflow.domain.usecase.impl.product;
 
 import com.shopflow.common.annotation.DomainTransactional;
 import com.shopflow.common.annotation.DomainUseCase;
 import com.shopflow.common.exception.ResourceNotFoundException;
 import com.shopflow.domain.model.Product;
 import com.shopflow.domain.service.ProductService;
-import com.shopflow.domain.usecase.FindByBarCodeUseCase;
+import com.shopflow.domain.usecase.FindByUseCase;
 
 @DomainUseCase
 @DomainTransactional
-public class FindByBarCodeUseCaseImpl implements FindByBarCodeUseCase {
+public class FindByBarCodeUseCaseImpl implements FindByUseCase<Product> {
 
     private final ProductService productService;
 
@@ -18,8 +18,8 @@ public class FindByBarCodeUseCaseImpl implements FindByBarCodeUseCase {
     }
 
     @Override
-    public Product findByBarCode(String codeBar) {
-        return productService.findByBarCode(codeBar)
-                .orElseThrow(() -> new ResourceNotFoundException("Product with codeBar " + codeBar + " not found"));
+    public Product findBy(String data) {
+        return productService.findByBarCode(data)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with codeBar " + data + " not found"));
     }
 }

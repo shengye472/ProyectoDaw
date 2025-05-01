@@ -2,8 +2,7 @@ package com.shopflow.controller;
 
 import com.shopflow.controller.common.PaginatedResponse;
 import com.shopflow.domain.model.Product;
-import com.shopflow.domain.usecase.FindAllUseCase;
-import com.shopflow.domain.usecase.FindByBarCodeUseCase;
+import com.shopflow.domain.usecase.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +21,18 @@ public class  ProductController {
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
 
-    private final FindAllUseCase findAllUseCase;
-    private final FindByBarCodeUseCase findByBarCodeUseCase;
+    private final FindAllUseCase<Product> findAllUseCase;
+    private final FindByUseCase<Product> findByCodeBarUseCase;
+    private final CreateUseCase<Product> createUseCase;
+    private final DeleteByUseCase<Product> deleteByCodeBarUseCase;
+    private final EditByUseCase<Product> editByCodeBarUseCase;
 
-    public ProductController(FindAllUseCase findAllUseCase, FindByBarCodeUseCase findByBarCodeUseCase) {
+    public ProductController(FindAllUseCase<Product> findAllUseCase, FindByUseCase<Product> findByCodeBarUseCase, CreateUseCase<Product> createUseCase, DeleteByUseCase<Product> deleteByCodeBarUseCase, EditByUseCase<Product> editByCodeBarUseCase) {
         this.findAllUseCase = findAllUseCase;
-        this.findByBarCodeUseCase = findByBarCodeUseCase;
+        this.findByCodeBarUseCase = findByCodeBarUseCase;
+        this.createUseCase = createUseCase;
+        this.deleteByCodeBarUseCase = deleteByCodeBarUseCase;
+        this.editByCodeBarUseCase = editByCodeBarUseCase;
     }
 
     @GetMapping
@@ -46,9 +51,27 @@ public class  ProductController {
 //        return new ResponseEntity<>(productList, HttpStatus.OK);
 //    }
 
-    @GetMapping("/{barCode}")
-    public ResponseEntity <Product> findByCodeBar(@PathVariable String barCode) {
-        Product product = findByBarCodeUseCase.findByBarCode(barCode);
+    @GetMapping("/{codeBar}")
+    public ResponseEntity <Product> findByCodeBar(@PathVariable String codeBar) {
+        Product product = findByCodeBarUseCase.findBy(codeBar);
         return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> create(@RequestBody Product product) {
+        createUseCase.create(product);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{codeBar}")
+    public ResponseEntity<Void> update(@PathVariable String codeBar, @RequestBody Product product) {
+        editByCodeBarUseCase.editBy(codeBar, product);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{codeBar}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable String codeBar) {
+        deleteByCodeBarUseCase.deleteBy(codeBar);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

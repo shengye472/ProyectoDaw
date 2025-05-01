@@ -1,4 +1,4 @@
-package com.shopflow.domain.usecase.impl;
+package com.shopflow.domain.usecase.impl.product;
 
 import com.shopflow.common.annotation.DomainTransactional;
 import com.shopflow.common.annotation.DomainUseCase;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @DomainUseCase
 @DomainTransactional
-public class FindAllUseCaseImpl implements FindAllUseCase {
+public class FindAllUseCaseImpl implements FindAllUseCase<Product> {
 
     private final ProductService productService;
 

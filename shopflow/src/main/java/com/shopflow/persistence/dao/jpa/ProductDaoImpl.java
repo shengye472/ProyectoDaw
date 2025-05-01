@@ -34,4 +34,15 @@ public class ProductDaoImpl implements ProductDao {
 
         return product;
     }
+
+    @Override
+    public void save(Product product) {
+        productJpaRepository.save(ProductJpaMapper.INSTANCE.toProductEntity(product));
+
+    }
+
+    @Override
+    public void deleteByCodeBar(String codeBar) {
+        productJpaRepository.deleteByBarCode(codeBar);
+    }
 }

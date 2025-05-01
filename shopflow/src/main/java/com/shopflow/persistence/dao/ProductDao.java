@@ -9,4 +9,8 @@ public interface ProductDao {
     List<Product> findAll();
 
     Optional<Product> findByBarCode(String barCode);
+
+    void save(Product product);
+
+    void deleteByCodeBar(String codeBar);
 }

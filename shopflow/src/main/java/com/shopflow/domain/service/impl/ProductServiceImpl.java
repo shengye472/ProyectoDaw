@@ -23,7 +23,17 @@ public class ProductServiceImpl  implements ProductService {
     }
 
     @Override
-    public Optional<Product> findByBarCode(String barCode) {
-        return productRepository.findByBarCode(barCode);
+    public Optional<Product> findByBarCode(String codeBar) {
+        return productRepository.findByBarCode(codeBar);
+    }
+
+    @Override
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+
+    @Override
+    public void deleteByCodeBar(String codeBar) {
+        productRepository.deleteByCodeBar(codeBar);
     }
 }

@@ -26,4 +26,14 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Optional<Product> findByBarCode(String barCode) {
         return productDao.findByBarCode(barCode);
     }
+
+    @Override
+    public void save(Product product) {
+        productDao.save(product);
+    }
+
+    @Override
+    public void deleteByCodeBar(String codeBar) {
+        productDao.deleteByCodeBar(codeBar);
+    }
 }

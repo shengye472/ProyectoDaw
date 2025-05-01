@@ -8,5 +8,9 @@ import java.util.Optional;
 public interface ProductService {
     List<Product> findAll();
 
-    Optional<Product> findByBarCode(String barCode);
+    Optional<Product> findByBarCode(String codeBar);
+
+    void save(Product product);
+
+    void deleteByCodeBar(String data);
 }

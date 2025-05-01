@@ -4,11 +4,20 @@ import java.math.BigDecimal;
 
 
 public class Product {
+    private Integer id;
     private String barCode;
     private String name;
     private BigDecimal price_sell;
     private BigDecimal price_buy;
     private int  stock;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getBarCode() {
         return barCode;

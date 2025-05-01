@@ -8,4 +8,6 @@ public interface ProductJpaRepository extends JpaRepository<ProductEntity, Integ
 
 
     ProductEntity findByBarCode(String barCode);
+
+    void deleteByBarCode(String codeBar);
 }
