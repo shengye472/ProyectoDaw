@@ -1,4 +1,4 @@
-package com.shopflow.domain.usecase;
+package com.shopflow.domain.usecase.common;
 
 
 import java.util.List;

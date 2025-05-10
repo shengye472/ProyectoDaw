@@ -29,3 +29,10 @@ CREATE TABLE detail_sale (
     id_product INT NOT NULL,
     Foreign Key (id_product) REFERENCES products(id)   
 )
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(20) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    rol INT(1) NOT NULL
+)

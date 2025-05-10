@@ -6,7 +6,6 @@ public class Detail {
     private int quantity;
     private BigDecimal subtotal;
     private Product products;
-    private Sale sale;
 
     public int getQuantity() {
         return quantity;
@@ -32,11 +31,7 @@ public class Detail {
         this.products = products;
     }
 
-    public Sale getSale() {
-        return sale;
-    }
-
-    public void setSale(Sale sale) {
-        this.sale = sale;
+    public BigDecimal calculateSubtotal(int quantity, BigDecimal price) {
+        return price.multiply(new BigDecimal(quantity));
     }
 }

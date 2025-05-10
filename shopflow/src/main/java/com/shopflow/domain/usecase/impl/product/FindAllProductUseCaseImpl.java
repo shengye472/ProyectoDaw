@@ -4,19 +4,17 @@ import com.shopflow.common.annotation.DomainTransactional;
 import com.shopflow.common.annotation.DomainUseCase;
 import com.shopflow.domain.model.Product;
 import com.shopflow.domain.service.ProductService;
-import com.shopflow.domain.usecase.FindAllUseCase;
+import com.shopflow.domain.usecase.common.FindAllUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @DomainUseCase
 @DomainTransactional
-public class FindAllUseCaseImpl implements FindAllUseCase<Product> {
+public class FindAllProductUseCaseImpl implements FindAllUseCase<Product> {
 
-    private final ProductService productService;
-
-    public FindAllUseCaseImpl(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired
+    private ProductService productService;
 
     @Override
     public List<Product> findAll() {

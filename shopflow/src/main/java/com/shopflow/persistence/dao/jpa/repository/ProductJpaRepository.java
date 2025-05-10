@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductJpaRepository extends JpaRepository<ProductEntity, Integer> {
 
-
     ProductEntity findByBarCode(String barCode);
 
     void deleteByBarCode(String codeBar);

@@ -5,20 +5,18 @@ import com.shopflow.common.annotation.DomainUseCase;
 import com.shopflow.common.exception.ResourceNotFoundException;
 import com.shopflow.domain.model.Product;
 import com.shopflow.domain.service.ProductService;
-import com.shopflow.domain.usecase.FindByUseCase;
+import com.shopflow.domain.usecase.product.FindByCodeBarUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @DomainUseCase
 @DomainTransactional
-public class FindByBarCodeUseCaseImpl implements FindByUseCase<Product> {
+public class FindByCodeBarUseCaseImpl implements FindByCodeBarUseCase {
 
-    private final ProductService productService;
-
-    public FindByBarCodeUseCaseImpl(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired
+    private ProductService productService;
 
     @Override
-    public Product findBy(String data) {
+    public Product findByCodeBar(String data) {
         return productService.findByBarCode(data)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with codeBar " + data + " not found"));
     }

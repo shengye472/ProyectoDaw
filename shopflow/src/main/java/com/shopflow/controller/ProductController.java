@@ -2,7 +2,12 @@ package com.shopflow.controller;
 
 import com.shopflow.controller.common.PaginatedResponse;
 import com.shopflow.domain.model.Product;
-import com.shopflow.domain.usecase.*;
+import com.shopflow.domain.usecase.common.FindAllUseCase;
+import com.shopflow.domain.usecase.product.CreateProductUseCase;
+import com.shopflow.domain.usecase.product.DeleteByCodeBarUseCase;
+import com.shopflow.domain.usecase.product.EditByCodeBarUseCase;
+import com.shopflow.domain.usecase.product.FindByCodeBarUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,19 +26,16 @@ public class  ProductController {
     @Value("${app.pageSize.default}")
     private String defaultPageSize;
 
-    private final FindAllUseCase<Product> findAllUseCase;
-    private final FindByUseCase<Product> findByCodeBarUseCase;
-    private final CreateUseCase<Product> createUseCase;
-    private final DeleteByUseCase<Product> deleteByCodeBarUseCase;
-    private final EditByUseCase<Product> editByCodeBarUseCase;
-
-    public ProductController(FindAllUseCase<Product> findAllUseCase, FindByUseCase<Product> findByCodeBarUseCase, CreateUseCase<Product> createUseCase, DeleteByUseCase<Product> deleteByCodeBarUseCase, EditByUseCase<Product> editByCodeBarUseCase) {
-        this.findAllUseCase = findAllUseCase;
-        this.findByCodeBarUseCase = findByCodeBarUseCase;
-        this.createUseCase = createUseCase;
-        this.deleteByCodeBarUseCase = deleteByCodeBarUseCase;
-        this.editByCodeBarUseCase = editByCodeBarUseCase;
-    }
+    @Autowired
+    private FindAllUseCase<Product> findAllUseCase;
+    @Autowired
+    private FindByCodeBarUseCase findByCodeBarUseCase;
+    @Autowired
+    private CreateProductUseCase createUseCase;
+    @Autowired
+    private DeleteByCodeBarUseCase deleteByCodeBarUseCase;
+    @Autowired
+    private EditByCodeBarUseCase editByCodeBarUseCase;
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<Product>> findAll(
@@ -53,7 +55,10 @@ public class  ProductController {
 
     @GetMapping("/{codeBar}")
     public ResponseEntity <Product> findByCodeBar(@PathVariable String codeBar) {
-        Product product = findByCodeBarUseCase.findBy(codeBar);
+        Product product = findByCodeBarUseCase.findByCodeBar(codeBar);
+        if (product == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
@@ -66,12 +71,15 @@ public class  ProductController {
     @PutMapping("/{codeBar}")
     public ResponseEntity<Void> update(@PathVariable String codeBar, @RequestBody Product product) {
         editByCodeBarUseCase.editBy(codeBar, product);
+        if (product == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{codeBar}")
     public ResponseEntity<Void> deleteProduct(@PathVariable String codeBar) {
-        deleteByCodeBarUseCase.deleteBy(codeBar);
+        deleteByCodeBarUseCase.deleteByCodeBar(codeBar);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

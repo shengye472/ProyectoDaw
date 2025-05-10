@@ -28,11 +28,9 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Optional<Product> findByBarCode(String barCode) {
-        Optional<Product> product = Optional.ofNullable(productJpaRepository
+        return Optional.ofNullable(productJpaRepository
                 .findByBarCode(barCode))
                 .map(ProductJpaMapper.INSTANCE::toProduct);
-
-        return product;
     }
 
     @Override

@@ -5,17 +5,15 @@ import com.shopflow.common.annotation.DomainUseCase;
 import com.shopflow.common.exception.ResourceNotFoundException;
 import com.shopflow.domain.model.Product;
 import com.shopflow.domain.service.ProductService;
-import com.shopflow.domain.usecase.EditByUseCase;
+import com.shopflow.domain.usecase.product.EditByCodeBarUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @DomainUseCase
 @DomainTransactional
-public class EditByBarCodeUseCaseImpl implements EditByUseCase<Product> {
+public class EditByBarCodeUseCaseImpl implements EditByCodeBarUseCase {
 
-    private final ProductService productService;
-
-    public EditByBarCodeUseCaseImpl(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired
+    private ProductService productService;
 
     @Override
     public void editBy(String data, Product body) {

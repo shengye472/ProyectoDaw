@@ -1,4 +1,3 @@
--- Active: 1740611144726@@127.0.0.1@3307
 
 USE shop;
 
@@ -22,3 +21,6 @@ INSERT INTO detail_sale (quantity, subtotal, id_sale, id_product) VALUES
 (3, 90.00, 3, 3),
 (4, 160.00, 4, 4),
 (5, 250.00, 5, 5);
+
+INSERT INTO users (username, password, rol) VALUES 
+('user', 'user', 1)

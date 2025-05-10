@@ -5,17 +5,15 @@ import com.shopflow.common.annotation.DomainUseCase;
 import com.shopflow.common.exception.ResourceAlreadyExistsException;
 import com.shopflow.domain.model.Product;
 import com.shopflow.domain.service.ProductService;
-import com.shopflow.domain.usecase.CreateUseCase;
+import com.shopflow.domain.usecase.product.CreateProductUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @DomainUseCase
 @DomainTransactional
-public class CreateUseCaseImpl implements CreateUseCase<Product> {
+public class CreateUseCaseImpl implements CreateProductUseCase {
 
-    private final ProductService productService;
-
-    public CreateUseCaseImpl(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired
+    private ProductService productService;
 
     @Override
     public void create(Product product) {
