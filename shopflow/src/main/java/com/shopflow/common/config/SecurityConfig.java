@@ -1,6 +1,5 @@
 package com.shopflow.common.config;
 
-import com.shopflow.common.util.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

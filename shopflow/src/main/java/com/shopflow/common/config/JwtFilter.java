@@ -1,5 +1,6 @@
-package com.shopflow.common.util;
+package com.shopflow.common.config;
 
+import com.shopflow.common.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,9 +34,9 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         final String token = authHeader.substring(7);
-        final String username = jwtUtil.extractUsername(token);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
+            String username = jwtUtil.extractUsername(token);
             if (jwtUtil.validateToken(token, username)) {
                 List<String> role = jwtUtil.extractRoles(token);
 
@@ -57,7 +58,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
         }
-
         filterChain.doFilter(request, response);
     }
 }

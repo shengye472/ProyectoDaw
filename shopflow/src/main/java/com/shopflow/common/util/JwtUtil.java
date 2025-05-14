@@ -29,15 +29,22 @@ public class JwtUtil {
     }
 
     public Claims obtainClaims(String token) {
+        try {
         return Jwts.parser()
                 .setSigningKey(SECRET)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean validateToken(String token, String username) {
         final String extractedUsername = extractUsername(token);
+        if (extractedUsername == null) {
+            return false;
+        }
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
 
@@ -46,7 +53,11 @@ public class JwtUtil {
     }
 
     public String extractUsername( String token) {
-        return obtainClaims(token).getSubject();
+       try {
+            return obtainClaims(token).getSubject();
+        } catch (Exception e) {
+            return null;
+       }
     }
 
     public List<String> extractRoles(String token) {

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.shopflow</groupId>
 	<artifactId>shopflow</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>shopflow</name>
 	<description>Api para organizar compra y venta de una tienda</description>
 	<url/>

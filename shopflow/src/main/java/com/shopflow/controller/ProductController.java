@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ProductController.URL)
+@CrossOrigin(origins = "http://localhost:4200")
 public class  ProductController {
     public static final String URL = "/api/products";
 
