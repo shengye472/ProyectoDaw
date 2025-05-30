@@ -1,0 +1,31 @@
+<mat-toolbar>
+
+    <button mat-icon-button (click)="home()">
+        <img src="logo.svg">
+    </button>
+    <span class="title" (click)="home()">ShopFlow</span>
+
+    <span class="spacer"></span>
+
+    <button mat-button (click)="home()">Inicio</button>
+
+    <button mat-button (click)="productos()">Productos</button>
+
+    @if (logger) {
+        <button mat-button (click)="ventas()">Ventas</button>
+
+        <button mat-button (click)="caja()">Caja</button>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="cerrarSesion()">Cerrar sesión</button>
+        </mat-menu>
+    } @else {
+        <button mat-icon-button (click)="iniciarSesion()">
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    }
+</mat-toolbar>

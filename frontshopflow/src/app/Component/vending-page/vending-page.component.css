@@ -1,0 +1,10 @@
+.cancel{
+    color: rgb(255, 0, 0);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cancel:hover{
+    background-color: rgba(255, 0, 0, 0.2);
+}

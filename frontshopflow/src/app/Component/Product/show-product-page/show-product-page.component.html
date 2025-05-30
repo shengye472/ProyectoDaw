@@ -1,0 +1,28 @@
+<div class="container my-4 text-center">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{ product.name }}</h5>
+        </div>
+        <div class="card-body">
+
+            <p class="card-text">
+                <strong>Código de barras:</strong> {{ product.barCode }}
+            </p>
+
+            <p class="card-text">
+                <strong>Precio de compra:</strong> {{ product.price_buy.toFixed(2) }}€
+            </p>
+
+            @if (logger) {
+            <p class="card-text">
+                <strong>Precio de venta:</strong> {{ product.price_sell.toFixed(2) }}€
+            </p>
+            }
+
+            <p class="card-text">
+                <strong>Stock:</strong> {{ product.stock }}
+            </p>
+        </div>
+    </div>
+    <button mat-button class="cancel mt-2" type="button" (click)="cancel()">Cancelar</button>
+</div>

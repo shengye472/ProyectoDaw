@@ -47,9 +47,11 @@ public class SaleController {
             @RequestParam(required = false) Integer size) {
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
 
-        List<Sale> saleList = findAllSaleUseCase.findAll();
+        List<Sale> saleList = findAllSaleUseCase.findAll(page - 1 , pageSize);
 
-        PaginatedResponse<Sale> response = new PaginatedResponse<>(saleList, saleList.size(), page, pageSize, baseUrl + URL);
+        int count = findAllSaleUseCase.count();
+
+        PaginatedResponse<Sale> response = new PaginatedResponse<>(saleList, count, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

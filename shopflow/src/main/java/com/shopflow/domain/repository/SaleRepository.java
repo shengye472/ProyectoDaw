@@ -8,9 +8,11 @@ import java.util.Optional;
 public interface SaleRepository {
     void save(Sale venta);
 
-    List<Sale> findAll();
+    List<Sale> findAll(int page, int pageSize);
 
     Optional<Sale> findById(Integer id);
 
     void deleteById(Integer id);
+
+    int count();
 }

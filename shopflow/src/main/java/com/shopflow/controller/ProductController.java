@@ -44,9 +44,11 @@ public class  ProductController {
             @RequestParam(required = false) Integer size) {
         int pageSize = (size != null) ? size : Integer.parseInt(defaultPageSize);
 
-        List<Product> productList = findAllUseCase.findAll();
+        List<Product> productList = findAllUseCase.findAll(page - 1, pageSize);
 
-        PaginatedResponse<Product> response = new PaginatedResponse<>(productList, productList.size(), page, pageSize, baseUrl + URL);
+        int count = findAllUseCase.count();
+
+        PaginatedResponse<Product> response = new PaginatedResponse<>(productList, count, page, pageSize, baseUrl + URL);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 //    public ResponseEntity<List<Product>> findAll() {

@@ -18,8 +18,8 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public List<Product> findAll() {
-        return productDao.findAll();
+    public List<Product> findAll(int page, int pageSize) {
+        return productDao.findAll(page, pageSize);
     }
 
     @Override
@@ -35,5 +35,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public void deleteByCodeBar(String codeBar) {
         productDao.deleteByCodeBar(codeBar);
+    }
+
+    @Override
+    public int count() {
+        return productDao.count();
     }
 }

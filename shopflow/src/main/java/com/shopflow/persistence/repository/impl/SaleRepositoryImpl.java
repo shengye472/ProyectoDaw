@@ -21,8 +21,8 @@ public class SaleRepositoryImpl implements SaleRepository {
     }
 
     @Override
-    public List<Sale> findAll() {
-        return saleDao.findAll();
+    public List<Sale> findAll(int page, int pageSize) {
+        return saleDao.findAll(page , pageSize);
     }
 
     @Override
@@ -33,5 +33,10 @@ public class SaleRepositoryImpl implements SaleRepository {
     @Override
     public void deleteById(Integer id) {
         saleDao.deleteById(id);
+    }
+
+    @Override
+    public int count() {
+        return saleDao.count();
     }
 }

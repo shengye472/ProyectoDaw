@@ -16,11 +16,11 @@ public class EditByBarCodeUseCaseImpl implements EditByCodeBarUseCase {
     private ProductService productService;
 
     @Override
-    public void editBy(String data, Product body) {
-        if (productService.findByBarCode(data).isEmpty()) {
-            throw new ResourceNotFoundException("Product with codeBar " + data + " not found");
-        }
-        body.setBarCode(data);
-        productService.save(body);
+    public void editBy(String barCode, Product product) {
+        Product result = productService.findByBarCode(barCode)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with codeBar " + barCode + " not found"));
+        product.setBarCode(barCode);
+        product.setId(result.getId());
+        productService.save(product);
     }
 }

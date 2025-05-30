@@ -7,6 +7,8 @@ import com.shopflow.persistence.dao.jpa.mapper.SaleJpaMapper;
 import com.shopflow.persistence.dao.jpa.model.SaleEntity;
 import com.shopflow.persistence.dao.jpa.repository.SaleJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -28,8 +30,9 @@ public class SaleDaoImpl  implements SaleDao {
     }
 
     @Override
-    public List<Sale> findAll() {
-        return saleJpaRepository.findAll()
+    public List<Sale> findAll(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return saleJpaRepository.findAll(pageable)
                 .stream()
                 .map(SaleJpaMapper.INSTANCE::toSale)
                 .toList();
@@ -44,5 +47,14 @@ public class SaleDaoImpl  implements SaleDao {
     @Override
     public void deleteById(Integer id) {
         saleJpaRepository.deleteById(id);
+    }
+
+    @Override
+    public int count() {
+        List<Sale> saleList = saleJpaRepository.findAll()
+                .stream()
+                .map(SaleJpaMapper.INSTANCE::toSale)
+                .toList();
+        return saleList.size();
     }
 }

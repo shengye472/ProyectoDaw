@@ -1,0 +1,43 @@
+<div class="container mt-4">
+
+  <h2 class="mb-3">🧾 Venta #{{ venta.id }}</h2>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <strong>Fecha:</strong>
+      {{ venta.date | date: 'dd/MM/yyyy HH:mm:ss' }}
+    </div>
+    <div class="col-md-6 text-md-end">
+      <strong>Total:</strong>
+      <span class="text-success">{{ venta.total }}€</span>
+    </div>
+  </div>
+
+
+  <div class="table-responsive mt-4">
+    <table class="table table-hover table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Producto</th>
+          <th>Codigo de Barras</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (detail of venta.details; track detail.products.barCode) {
+        <tr>
+          <td>{{ detail.products.name }}</td>
+          <td>{{ detail.products.barCode }}</td>
+          <td>{{ detail.quantity }}</td>
+          <td>{{ detail.products.price_sell }}€</td>
+          <td>{{ detail.subtotal }}€</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center mb-4">
+    <button mat-button class="cancel mt-2" type="button" (click)="cancel()">Volver</button>
+</div>

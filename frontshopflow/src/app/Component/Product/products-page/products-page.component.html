@@ -1,0 +1,65 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <div>
+            <form [formGroup]="searchForm" (ngSubmit)="getProductByBarCode()" class="d-flex">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Buscador </mat-label>
+                    <input matInput placeholder="codigo de barras..." formControlName="barCode" >
+                </mat-form-field>
+                <button mat-fab type="submit" [disabled]="searchForm.invalid" class="mx-2">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </form>
+        </div>
+
+        @if (logger) {
+        <button mat-raised-button (click)="New()">Nuevo</button>
+        }
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>Codigo de Barras</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    @if (logger) {
+                    <th>Precio compra</th>
+                    <th class="text-center">Acciones</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (product of products; track product.barCode) {
+                <tr>
+                    <td>{{product.barCode}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.stock}}</td>
+                    <td>{{product.price_sell}}€</td>
+                    @if (logger) {
+                    <td>{{product.price_buy}}€</td>
+                    <td class="d-flex justify-content-center gap-3">
+                        <button class="btn btn-primary" (click)="Edit(product.barCode)">Editar</button>
+                        <button class="btn btn-danger" (click)="deleteProduct(product.barCode)">Borrar</button>
+                    </td>
+                    }
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3 align-items-center" >
+        <button mat-mini-fab  [disabled]="previusUrl == null" (click)="getNextProducts(previusUrl)">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <span class="mx-4">{{currentPage}} / {{allpages}}</span>
+        <button mat-mini-fab [disabled]="nextUrl == null" (click)="getNextProducts(nextUrl)">
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+
+    </div>
+</div>

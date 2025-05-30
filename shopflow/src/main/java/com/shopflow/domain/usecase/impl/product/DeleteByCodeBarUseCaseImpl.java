@@ -15,10 +15,10 @@ public class DeleteByCodeBarUseCaseImpl implements DeleteByCodeBarUseCase {
     private ProductService productService;
 
     @Override
-    public void deleteByCodeBar(String data) {
-        if (productService.findByBarCode(data).isEmpty()) {
-            throw new ResourceNotFoundException("Product with codeBar " + data + " not found");
+    public void deleteByCodeBar(String barCode) {
+        if (productService.findByBarCode(barCode).isEmpty()) {
+            throw new ResourceNotFoundException("Product with codeBar " + barCode + " not found");
         }
-        productService.deleteByCodeBar(data);
+        productService.deleteByCodeBar(barCode);
     }
 }

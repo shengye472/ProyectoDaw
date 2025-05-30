@@ -17,7 +17,12 @@ public class FindAllSaleUseCaseImpl implements FindAllUseCase<Sale> {
     private SaleService saleService;
 
     @Override
-    public List<Sale> findAll() {
-        return saleService.findAll();
+    public List<Sale> findAll(int page, int pageSize) {
+        return saleService.findAll(page, pageSize);
+    }
+
+    @Override
+    public int count() {
+        return saleService.count();
     }
 }

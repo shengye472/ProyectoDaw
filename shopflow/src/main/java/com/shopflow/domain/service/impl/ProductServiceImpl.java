@@ -16,8 +16,8 @@ public class ProductServiceImpl  implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> findAll() {
-        return productRepository.findAll();
+    public List<Product> findAll(int page, int pageSize) {
+        return productRepository.findAll(page, pageSize);
     }
 
     @Override
@@ -33,5 +33,10 @@ public class ProductServiceImpl  implements ProductService {
     @Override
     public void deleteByCodeBar(String codeBar) {
         productRepository.deleteByCodeBar(codeBar);
+    }
+
+    @Override
+    public int count() {
+        return productRepository.count();
     }
 }
